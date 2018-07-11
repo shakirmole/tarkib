@@ -1,0 +1,60 @@
+.clear-right {
+	clear:right;
+}
+
+.smallinput {
+	width: 60px !important;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.no-underline {
+	text-decoration: none !important;
+}
+
+label {
+	display:inline-block;
+	min-width:100px;
+	line-height:1.5em;
+	vertical-align:middle;
+}
+
+fieldset {
+	border:1px solid gray;
+}
+
+#sidebar {
+	border-left:1px solid #C0c0c0;
+	padding-left:10px
+}
+
+.afitb {
+	display: inline-block;
+	width:100px;
+	border: 0;
+	border-bottom: 2px solid black;
+}
+
+.force-center, .align-center {
+	text-align: center !important;
+}
+
+.align-number {
+	text-align: right !important;
+}
+
+.row-center td, .row-center th {
+	text-align: center !important;
+}
+
+.select2-hidden-accessible {
+	display: none !important;
+}
+
+.container-login {
+	width:500px;
+	margin:0 auto;
+	margin-top: 50px;"
+}
