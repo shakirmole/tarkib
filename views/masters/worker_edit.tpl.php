@@ -1,15 +1,18 @@
 <h3> Add Worker </h3>
 
-<form enctype="multipart/form-data" method="post" <?=VALIDATEFORM?> <?=windowOnSubmit('masters','worker_save')?>>
+<form enctype="multipart/form-data" method="post" <?=VALIDATEFORM?> action="?module=masters&action=worker_save" >
 	<?=insertHiddenInput('id',$worker['id'])?>
 	
 	<?=insertTextInput('Name','worker[name]',$worker['name'],'firstfocus','Enter the worker\'s name','text',1,'required|Name is required')?><br>
 	
 	<?=insertTextInput('Mobile <small> +255 0XXX XXXXXX </small>|Mobile','worker[mobile]',$worker['mobile'],'','Enter the worker\'s mobile','text',1,'required pattern=(^[0-9]{9}$)| Enter 9 digits only')?><br>
 	
-	<?=insertSelect('Company','','companyid','Select your company',0,1,$companies,'name|id','id|'.$worker['companyid'])?><br>
+	<?=insertSelect('Company','companyid','companyid','Select your company',0,1,$companies,'name|id','id|'.$worker['companyid'])?><br>
 	
 	<?=insertSelect('Location','worker[locationid]','locationid','Select your location',0,0,$locations,'name|id','id|'.$worker['locationid'])?><br>
+	
+	<? if ($worker['photo']) $imagepath = 'img/'.$worker['companyid'].'/'.$worker['photo']; ?>
+	<?=insertFileInput('Photo','photo',$imagepath,'','Upload an Image')?> <br>
 	
 	<?=insertSaveButton('Save');?>
 </form>

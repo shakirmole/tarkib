@@ -1,7 +1,7 @@
-<h2> Workers </h2>
+<h2> Templates </h2>
 
 <div>
-	<span class="place-right"> <a class="button" href="?module=masters&action=worker_add"> Add </a> </span>
+	<span class="place-right"> <a class="button" href="?module=associations&action=template_add"> Add </a> </span>
 	<form method="GET" class='no-visible' <?=VALIDATEFORM?>>
 		<input type="hidden" name="module" value="masters">
 		<input type="hidden" name="action" value="locations">
@@ -20,20 +20,20 @@
 				<th>&nbsp;</th>
 				<th>No.</th>
 				<th>Name</th>
-				<th>Mobile</th>
-				<th>Location</th>
+				<th>Company</th>
+				<th>Checks</th>
 			</tr>
 		</thead>
 		<tbody>
-	<?php foreach($workers as $id=>$R) { ?>
+	<?php foreach($templates as $id=>$R) { ?>
 		<tr>
 			<td nowrap style="width:80px">
-				<a href="?module=masters&action=worker_edit&id=<?=$R['id']?>"><span class="mif-pencil"></a>
+				<a href="?module=associations&action=template_edit&id=<?=$R['id']?>"><span class="mif-pencil"></a>
 			</td>
 			<td style="width:80px"><?=$id+1?></td>
 			<td><?=$R['name']?></td>
-			<td><?=$R['mobile']?></td>
-			<td><?=$R['location']?></td>
+			<td><?=$R['company']?></td>
+			<td><?=$R['checks']?></td>
 		</tr>
 	<?php } ?>
 		</tbody>

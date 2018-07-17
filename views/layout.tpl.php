@@ -27,13 +27,13 @@
 	</head>
 	<body class="">
 		<div id="maincontent">
-			<div class="">
+			<header>
 				<?=$menu?>
-			</div>
+			</header>
 			
 			<!--<span class='button mif-apps' style='position:fixed;bottom:10px;right:0px;' onclick="toggleMetroCharm('#sidebar')"></span>-->
 			
-			<div class=" bg-white p-20">
+			<div class="container bg-white" style='margin-top:80px'>
 				<div class="grid">
 					<div class="row">
 						<div class="cell">

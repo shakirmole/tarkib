@@ -18,6 +18,8 @@
 	
 	$DeviceWorkers = new DeviceWorkers();
 	$WorkerTimings = new WorkerTimings();
+	$Templates = new Templates();
+	$TemplateTimings = new TemplateTimings();
+	
 	$WorkerRegistrations = new WorkerRegistrations();
 	$WorkerAlerts = new WorkerAlerts();
-	$TimingTemplates = new TimingTemplates();

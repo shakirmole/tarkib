@@ -139,11 +139,11 @@
 		return number_format($no, $decimals);
 	}
 	
-	function resizeAndUploadImage($uploaddir,$image,$ctrl_imgwidth,$new_imgheight,$name="") { //$image = "array";
+	function resizeAndUploadImage($uploaddir,$image,$ctrl_imgwidth,$new_imgheight) { //$image = "array";
 		$time = time();
 		if ( $image['name'] ) {
 			$size = getimagesize($image["tmp_name"]); //check if image is uploaded if it has image size
-			if ($size) { //resize image to 200xp width
+			if ($size) { //resize image to x width
 				$extension = pathinfo($image['name'], PATHINFO_EXTENSION);
 				if($extension == "gif")	{ $imgconv = imagecreatefromgif($image["tmp_name"]);	}
 				elseif($extension == "jpg" || $extension == "jpeg")	{ $imgconv = imagecreatefromjpeg($image["tmp_name"]);	}

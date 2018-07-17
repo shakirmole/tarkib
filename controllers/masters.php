@@ -186,53 +186,47 @@ if ( $action == 'workers' ) {
 	$data['content'] = loadTemplate($folder.'workers.tpl.php',$tData);
 }
 
-if ( $action == 'worker_edit' ) {
-	$data['layout'] = 'layout_iframe.tpl.php';
-	
+if ( $action == 'worker_edit' ) {	
 	$id = $_GET['id'];
 	$tData['worker'] = $Workers->getDetails($id);
 	
 	$action = 'worker_add';
 }
 
-if ( $action == 'worker_add') {
-	$data['layout'] = 'layout_iframe.tpl.php';
-	
+if ( $action == 'worker_add') {	
 	$tData['companies'] = $Companies->search();
 	
 	$data['content'] = loadTemplate($folder.'worker_edit.tpl.php',$tData);
 }
 
-if ( $action == 'ajax_worker_save' ) {
-	
-	$obj = null;
+if ( $action == 'worker_save' ) {
 	
 	$id = intval($_POST['id']);
 	$miniData = $_POST['worker'];
+	$companyId = $_POST['companyid'];
+	$company = $Companies->get($companyId);
+	
+	$folderName = 'img/'.$companyId.'/';
+	if ( !is_dir($folderName) ) mkdir($folderName);
+	
+	if ($_FILES['photo']['tmp_name']) {
+		$miniData['photo'] = resizeAndUploadImage($folderName,$_FILES['photo'],200,200);
+	}
 	
 	if ( empty($id) )  {
 		$miniData['createdby'] = USER_ID;
 		$Workers->insert($miniData);
 		
-		$obj->msg='Worker Added';
-		$obj->status=1;
-		$obj->redirect='?module=masters&action=worker_add';
-		$obj->mainredirect='?module=masters&action=workers';
-				
+		$_SESSION['message'] = 'Worker Added';
+		redirect('masters','worker_add');				
 	} else {
 		$miniData['modifiedby'] = USER_ID;
 		
 		$Workers->update($id,$miniData);
 		
-		$obj->msg='Worker Updated';
-		$obj->status=1;
-		$obj->redirect='?module=masters&action=worker_edit&id='.$id;
-		$obj->mainredirect='?module=masters&action=workers';
-				
+		$_SESSION['message'] = 'Worker Updated';
+		redirect('masters','worker_edit','id='.$id);
 	}
-	
-	$response[]=$obj;
-	$data['content'] = $response;
 }
 
 if ($action == 'ajax_getLocations' ) {
