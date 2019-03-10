@@ -12,7 +12,7 @@
 					
 			$sql .= " order by m.sortno, s.sortno";
 			// echo $sql;
-			return fetchRows($sql);
+			return $this->fetchRows($sql);
 		}
 		
 	}

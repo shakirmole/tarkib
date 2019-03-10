@@ -1,6 +1,6 @@
 <? if (!$admin) $admin['status'] = 1; ?>
 <h3> Add Admin </h3>
-<form enctype="multipart/form-data" method="post" <?=VALIDATEFORM?> <?=windowOnSubmit('users','admin_save','checkUsername();')?>>
+<form enctype="multipart/form-data" method="post" <?=createValidator()?> <?=windowOnSubmit('users','admin_save','checkUsername();')?>>
 	<?=insertHiddenInput('id',$admin['id'])?>
 	<?=insertHiddenInput('userid',$admin['userid'])?>
 	

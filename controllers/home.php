@@ -1,15 +1,45 @@
 <?
 
+$folder = 'home/';
+
 if ( $action == 'index' ) {
-		
-	if (!$_SESSION['member']) $tData['authenticate'] = loadTemplate('authenticate.tpl.php');
 	
-	if ($_SESSION['member']['type'] == 'admin') {
+	if ($_GET['suraid']) $tData['suraid']= $_GET['suraid'];
+	else $tData['suraid'] = 1;
+	$tData['verseid'] = $_GET['verseid'];
+	
+	$tData['suras'] = $Suras->search();
+	$tData['verses'] = $Verses->search($tData['suraid']);
+	
+	if ($tData['verseid']) {
+		$verse = $Verses->getDetails($tData['verseid']);
+		$tData['words'] = explode(' ',$verse['text']);
 		
+		$tData['tarkibTypes'] = $TarkibTypes->search();
 	}
 		
-	$data['content'] = loadTemplate('home.tpl.php',$tData);
+	$data['content'] = loadTemplate($folder.'quran.tpl.php',$tData);
 }
+
+
+
+if ($action == 'ajax_getVerses' ) {
+	$suraid = $_GET['suraid'];
+	
+	$verses = $Verses->search($suraid);
+	
+	$response = array();
+	
+	foreach ($verses as $r) {
+		$obj=null;
+		$obj->verseno=$r['verseno'];
+		$obj->id=$r['id'];
+		$response[]=$obj;
+	}
+		
+	$data['content']=$response;
+}
+
 
 if ($action == 'import' ) {
 	

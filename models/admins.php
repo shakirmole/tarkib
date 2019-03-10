@@ -10,7 +10,7 @@
 					where 1 = 1 ";
 			if ( $name ) $sql .= " and name like '%" . $name . "%'";
 			// echo $sql;
-			return fetchRows($sql);
+			return $this->fetchRows($sql);
 		}
 		
 		function getDetails($adminid='',$userid='') {
@@ -20,7 +20,7 @@
 			if ( $adminid ) $sql .= " and a.id = " . $adminid;
 			if ( $userid ) $sql .= " and a.userid = " . $userid;
 			// echo $sql;
-			return fetchRow($sql);
+			return $this->fetchRow($sql);
 		}
 		
 	}

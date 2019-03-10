@@ -1,16 +1,33 @@
 <script>
+	addClasses();
+$(function(){
+	try {
+		<?php if ( $error ) { echo 'triggerError("'.$error.'",null)'; } ?>;
+		<?php if ( $message ) { echo 'triggerMessage("'.$message.'",null)'; } ?>;
+	}
+	catch (e) {}
+	
+	createCalenders();
+	firstFocus();
+	createSearchableSelects();
+	maskInputs()
+	<? if ($autoopen) { ?>
+		openWindow('<?=$autoopen?>');
+	<? } ?>
+});
+
 function triggerError(msg) {
-	var notify = Metro.notify;
-	notify.setup({	timeout: 5000, duration: 500 });
-	notify.create(msg, "", { cls: "alert" });
-	notify.reset();
+	var toast = Metro.toast.create;	
+	toast(msg, null, 5000, "alert");
 }
 
 function triggerMessage(msg, o) {
-	var notify = Metro.notify;
-	notify.setup({ timeout: 5000, duration: 100  });
-	notify.create(msg, "", { cls: "success" });
-	notify.reset();
+	var toast = Metro.toast.create;	
+	toast(msg, null, 5000, "success");
+}
+
+function triggerInputError(obj) {
+	console.log(obj);
 }
 
 function addClasses() {
@@ -20,33 +37,57 @@ function addClasses() {
 	$('[class^=app-bar-]').addClass('bg-<?=COLOR?>');
 	$('*[data-validate-func="required"]').addClass('bd-red');
 	$('fieldset').addClass('bd-lightGray p-5');
-	$('.input-clear-button').remove();
+	$('.button,.table,.menu,.app-bar').addClass('drop-shadow');
+	$('table.table').parent().addClass('');
 	
+	$('.input-clear-button').remove();
 	$('.sp_icon').removeClass('fg-<?=COLOR?>');
 	$('.sp_button').removeClass('<?=ButtonBkgText?>');
 }
 
-function createCalenders() { //partly outdated
-	$(".datepicker").datepicker({
-		format: "yyyy-mm-dd", // set output format
-		effect: "fade", // none, slide, fade
-		position: "bottom", // top or bottom,
+function maskInputs() {
+	Inputmask.extendDefaults({
+	  'autoUnmask': true
 	});
-	
-	$(".resdatepicker").datepicker({
-		format: "yyyy-mm-dd", // set output format
-		effect: "fade", // none, slide, fade
-		position: "bottom", // top or bottom,
+	$('.money').inputmask({ alias : "currency", prefix: '', removeMaskOnSubmit: true , placeholder: "0", digits: 2});
+	$('.mobile').inputmask("+255 999 999999", { removeMaskOnSubmit: true});
+}
+
+function unmaskAllInputs() {
+	$('.money').inputmask('remove');	
+	$('.mobile').inputmask('remove');	
+}
+
+function createCalenders() {
+	$(".datepicker").calendarpicker({
+		format: "%Y-%m-%d",		
+		dialogMode: true,
+		clsCalendar: 'compact',
+		calendarButtonIcon: '',
+	});
+	$(".resdatepicker").calendarpicker({
+		format: "%Y-%m-%d",		
+		dialogMode: true,
+		clsCalendar: 'compact',
 		minDate: '<?=date('Y-m-d',strtotime('yesterday'))?>',
 		minYear: '<?=date('Y',strtotime('yesterday'))?>',
 	});
 	
-	$(".dobdatepicker").datepicker({
-		format: "yyyy-mm-dd", // set output format
-		effect: "fade", // none, slide, fade
-		position: "bottom", // top or bottom,
+	$(".dobdatepicker").calendarpicker({
+		format: "%Y-%m-%d", // set output format
+		dialogMode: true,
+		clsCalendar: 'compact',
 		maxDate: '<?=date('Y-m-d')?>'
 	});
+}
+
+function convertToCalendar(obj) {
+	$(obj).calendarpicker({
+		format: "%Y-%m-%d",
+		dialogMode: true,
+		clsCalendar: 'compact',
+	});
+	$(obj).val('<?=date('Y-m-d')?>');
 }
 
 function openWindow(link) {
@@ -57,13 +98,15 @@ function openWindow(link) {
 		overlayClickClose: true,
 		width: 900,
 		height: 600,
-		defaultAction: false
+		defaultAction: false,
+		clsDialog: 'scroll-y'
 	});
 
 	reloadWindowContent(link);
 }
 
 function reloadWindowContent(link) {
+	link = link+"&main_refresh=<?=$_SESSION['main_refresh']?>";
 	$('.dialog-content').load(link);
 }
 
@@ -89,52 +132,36 @@ function firstFocus() {
 	$('.firstfocus').focus();
 }
 
-$(function(){
-	try {
-		<?php if ( $error ) { echo 'triggerError("'.$error.'",null)'; } ?>;
-		<?php if ( $message ) { echo 'triggerMessage("'.$message.'",null)'; } ?>;
-	}
-	catch (e) {}
-	
-	addClasses();
-	createCalenders();
-	firstFocus();
-	<? if ($autoopen) { ?>
-		openWindow('<?=$autoopen?>');
-	<? } ?>
-	// $('textarea').editable({inlineMode: false})
-});
+function createSearchableSelects() {
+	$('.searchable').select2();
+}
 
-var cmdirect = 1; var cdirect = 1;
-function submitForm(form,url) {
-	
-	if ( FIC_checkForm(form) ) { } else {
-		triggerError("Please check the highlighted fields");
-		return false;
-	}
-	
+var cdirect = 1;
+function submitForm(form,url) {		
 	formdata = $(form).closest('form').serialize();	
 	
-	//replace submit with loading
-	if ($('.submit').hasClass('place-right')) var oclass = 'place-right'; else var oclass = '';
-	$('.submit').replaceWith('<button onclick="return false;" class="button '+oclass+' warning"><span class="mif-spinner2 mif-ani-spin"></span> Loading</button>');
+	var submitBtn = $(form).closest('form').find('.submit');
+	if (submitBtn.hasClass('place-right')) var oclass = 'place-right'; else var oclass = '';
+	submitBtn.replaceWith('<button onclick="return false;" class="button '+oclass+' warning replaced-submit"><span class="mif-spinner2 mif-ani-spin"></span> Loading</button>');
 	
 	$.post(url+"&format=json", formdata,function(d){
 		CC = $.parseJSON(d);				
 		
 		if (CC[0].status) {
 			triggerMessage(CC[0]['msg']);
-			if (cmdirect) {
+			<?  if ($_SESSION['main_refresh'] == 1) { ?>
 				$('#maincontent').load(CC[0].mainredirect, function(){
 					if (CC[0].redirect && cdirect) reloadWindowContent(CC[0].redirect);
 				});
-				} else {
+			<? } else { ?>
 				if (CC[0].redirect) reloadWindowContent(CC[0].redirect);
-			}
+			<? } ?>
 			
-			} else {
+		} else {
 			triggerError(CC[0]['msg']);
-		}
+			var replacedBtn = $(form).closest('form').find('.replaced-submit');
+			replacedBtn.replaceWith(submitBtn);
+		}	
 		
 	});
 }
@@ -144,6 +171,7 @@ function replaceSubmit(form) {
 }
 
 $(document).on('submit','form.window-form',function(){
+	unmaskAllInputs();
 	return false;
 })
 

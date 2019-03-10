@@ -1,7 +1,7 @@
 <?
     define('ElementHover','bg-hover-black fg-white bg-'.COLOR);
 ?>
-<nav class="app-bar <?=TableHead?> app-bar-expand-md" data-role="appbar">
+<nav class="app-bar <?=TableHead?>" data-role="appbar" data-expand-point="md">
 	<a href="?action=index" class="brand no-hover d-none-lg fg-white">Admin Panel</a>
 	
 	<ul class="app-bar-menu">
@@ -13,6 +13,10 @@
 				</a>
 				<ul class="d-menu" data-role="dropdown">
 					<? foreach ($menu['subs'] as $sname=>$sub) { ?>
+						<? 
+						if (USERTYPE != 'admin') {
+							if ($sname == 'Companies') $sname = 'My Company';
+						} ?>
 						<li class="bg-<?=COLOR?>"><a class='fg-white' href='<?=url($sub['smod'],$sub['sact'])?>'><?=$sname?></a></li>
 					<? } ?>
 				</ul>
@@ -27,12 +31,13 @@
 			<li>
 				<a class='<?=ElementHover?>' href="?module=settings&action=index">Settings</a>
 			</li>
-		<? } ?>	
+		<? } ?>
+	</ul>
+	<ul class="app-bar-menu ml-auto">
 		<? if ($_SESSION['member']) { ?>
-		<li class='<?=ElementHover?>'>
+		<li class='<?=ElementHover?>' style='min-width:150px'>
 			<a class="dropdown-toggle <?=ElementHover?>" href="#">
-				<span class="mif-cog sp_icon fg-white"></span>
-				<?=USERFULLNAME?> <? if ($_SESSION['member']['class']) echo '- '. $_SESSION['member']['class']?>
+			<?=USERFULLNAME?> <? if ($_SESSION['member']['class']) echo '- '. $_SESSION['member']['class']?>
 			</a>
 			<ul class="d-menu" data-role="dropdown">
 				<li class="bg-<?=COLOR?>"><a class='fg-white' href="?module=settings&action=user_settings">My Settings</a></li>
@@ -46,4 +51,6 @@
 		<? */ } ?>
 	</ul>
 		
+	<ul class="app-bar-menu place-right">		
+	</ul>
 </nav>

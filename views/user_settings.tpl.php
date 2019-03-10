@@ -1,5 +1,5 @@
 <h3> My Settings </h3>
-<form enctype="multipart/form-data" <?=VALIDATEFORM?> action="?module=settings&action=user_settings_save" method="post">	
+<form enctype="multipart/form-data" <?=createValidator()?> action="?module=settings&action=user_settings_save" method="post">	
 	
 	<?=insertTextInput('Your Name','',USERFULLNAME,'','Your name','text',1,'','readonly')?><br>
 	

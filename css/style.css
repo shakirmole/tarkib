@@ -1,3 +1,31 @@
+body {
+ overflow:auto;
+}
+
+.bg-logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	opacity:0.2;
+	margin:0 auto;
+	z-index: -1;
+}
+
+.logo {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width:100%;
+	color: white;
+	text-align: center;
+	background-color:white;
+}
+
+.logo-img {
+	width:120px;
+	margin:0 auto;
+}
+
 .clear-right {
 	clear:right;
 }
@@ -53,8 +81,48 @@ fieldset {
 	display: none !important;
 }
 
+.total-borders {
+	border-top: 1px black solid !important;
+	border-bottom: 3px black double !important;
+}
+
+.row-center td, .row-center th {
+	text-align: center !important;
+}
+
+.number-box {
+	padding:3px 8px;
+	border:1px solid black;
+	margin:0 !important;
+}
+
+.select2-hidden-accessible {
+	display: none !important;
+}
+
+.filler-box {
+	padding:3px 8px;
+	border:1px solid black;
+	margin:0 !important;
+	background-color:black;
+}
+
+.bottom-dotted {
+	border-bottom: 1px solid black;
+	display:inline-block;
+	width:100px;
+}
+
 .container-login {
 	width:500px;
 	margin:0 auto;
-	margin-top: 50px;"
+	margin-top: 50px;
+}
+
+.table-black-border, .table-black-border tr td {
+	border-color: black !important;
+}
+
+.report-label {
+	font-weight: bold;
 }

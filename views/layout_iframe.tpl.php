@@ -5,7 +5,8 @@
 
 <script>
 	addClasses();
-	createCalenders();
+	maskInputs();
+	<? if ($_SESSION['main_refresh']==1) { ?> createCalenders(); <? } ?>
 	firstFocus();
 	// $('textarea').editable({inlineMode: false})
 </script>

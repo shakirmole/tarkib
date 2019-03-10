@@ -13,18 +13,14 @@
 		
 		<link rel="stylesheet" href="css/metro.css">
 		<link rel="stylesheet" href="css/style.css">
-		<link href="css/datatables.css" media="screen" rel="stylesheet" type="text/css"/>
 		<link href="css/select2.main.css" media="screen" rel="stylesheet" type="text/css"/>
 		<link href="css/select2.css" media="screen" rel="stylesheet" type="text/css"/>
 		<script src="js/jquery.js"></script>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
 	</head>
 	<body class="">
 		<div id="maincontent">
-			<div class="">
-				<?=$menu?>
-			</div>
-			
-			<div class="bg-white mt-20 m-10 mb-20">
+			<div class="bg-white mb-20">
 				<div class="grid">
 					<div class="row">
 						<div class="cell">
@@ -38,10 +34,16 @@
 			</div>
 			
 		</div>
+		<div class="bg-logo">
+			
+		</div>
+
+		<span class='logo'>
+			<img src='img/<?=LOGO?>' class='logo-img'>
+		</span>
 				
 		<? include_once('js/scripts.js'); ?>
 		<script src="js/custom.js"></script>
-		<script src="js/datatables.js"></script>
 		<script src="js/select2.js"></script>
 		<script src="js/maskinput.js"></script>
 		

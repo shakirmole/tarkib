@@ -1,12 +1,11 @@
 <?php
 
-	$data['layout'] = 'layout_login.tpl.php';
+	$data['layout'] = 'layout_authenticate.tpl.php';
 
 	if ( $action == 'login' ) {
 		$tData['username'] = $_GET['username'];
 	
-		// redirect('home','index');
-		// $data['content'] = loadTemplate('admin/login.tpl.php',$tData);
+		$data['content'] = loadTemplate('login.tpl.php',$tData);
 	}
 	
 	if ( $action == 'dologin' ) {

@@ -1,5 +1,5 @@
 <h3> User Rights </h3>
-<form enctype="multipart/form-data" <?=VALIDATEFORM?>>
+<form enctype="multipart/form-data" <?=createValidator()?>>
 	
 	<input type="hidden" name="id" value="<?=$id?>">
 	

@@ -6,29 +6,37 @@
 		<meta name="author" content="Ahadith" />
 		
 		<link rel="stylesheet" href="css/metro.css">
-		<link rel="stylesheet" href="css/metro-responsive.css">
-		<link rel="stylesheet" href="css/metro-icons.css">
-		<link rel="stylesheet" href="css/metro-schemes.css">
-		<link rel="stylesheet" href="css/metro-rtl.css">
-		<link rel="stylesheet" href="css/metro-colors.css">
-		<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<link href="css/froala_page.min.css" rel="stylesheet" type="text/css">
-		<link href="css/froala_editor.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="css/style.css">
-		<link href="css/StyleSheet.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="css/datatables.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="css/select2.main.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="css/select2.css" media="screen" rel="stylesheet" type="text/css"/>
 		
-		<script>
-		  window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-		</script>
 		<!-- Metro UI CSS JavaScript plugins -->
+		<script src="js/jquery.js"></script>
 		<script src="js/towords.js"></script>
 		<script src="js/metro.js"></script>
+		<script src="js/maskinput.js"></script>
+		<script src="js/custom.js"></script>
 		
 		<style>
 			.table th { padding: 0.5rem !important; }
 			.table td { padding: 0rem 0.3rem !important; }
 			.input-control input { border:  !important}
 			.row { margin: 0 !important}
+			@media print{
+				.d-print-none{
+					display:none;
+				}
+				div.footer {
+					position: fixed;
+					bottom: 0;
+				}
+			}
+			@media screen {
+				div.footer {
+					display: none;
+				}
+			}
 		</style>
 	</head>
 	<body class="">

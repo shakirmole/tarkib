@@ -1,40 +1,39 @@
 <?
 $folder = 'users/';
 
-if ( $action == 'staffs' ) {
+if ( $action == 'students' ) {
 	
 	$tData['name'] = $_GET['name'];
 	
-	$tData['users'] = $Staffs->search($tData['name']);
+	$tData['students'] = $Students->search($tData['name']);
 	
-	$data['content'] = loadTemplate($folder.'staffs.tpl.php',$tData);
+	$data['content'] = loadTemplate($folder.'students.tpl.php',$tData);
 }
 
-if ( $action == 'staff_edit' ) {
+if ( $action == 'student_edit' ) {
 	$data['layout'] = 'layout_iframe.tpl.php';
 	
 	$id = $_GET['id'];
-	$tData['staff'] = $Staffs->getDetails($id);	
+	$tData['student'] = $Students->getDetails($id);	
 	
-	$action = 'staff_add';
+	$action = 'student_add';
 }
 
-if ( $action == 'staff_add') {
+if ( $action == 'student_add') {
 	$data['layout'] = 'layout_iframe.tpl.php';
 	
-	$tData['usernames'] = $Users->getUsernames($tData['staff']['userid']);
-	$tData['companies'] = $Companies->search();
+	$tData['usernames'] = $Users->getUsernames($tData['student']['userid']);
 	
-	$data['content'] = loadTemplate($folder.'staff_edit.tpl.php',$tData);
+	$data['content'] = loadTemplate($folder.'student_edit.tpl.php',$tData);
 }
 
-if ( $action == 'ajax_staff_save' ) {
+if ( $action == 'ajax_student_save' ) {
 	
 	$obj = null;
 	
 	$id = intval($_POST['id']);
 	$userid = intval($_POST['userid']);
-	$miniData = $_POST['staff'];
+	$miniData = $_POST['student'];
 	$uData = $_POST['user'];
 	
 	if (!$uData['status']) $uData['status'] = 0;
@@ -42,7 +41,7 @@ if ( $action == 'ajax_staff_save' ) {
 	else unset($uData['password']);
 	$uData['name'] = $miniData['name'];
 	
-	$utype = $UserTypes->getDetails('staff');
+	$utype = $UserTypes->getDetails('student');
 	$uData['utypeid'] = $utype['id'];
 	
 	if ( empty($id) )  {
@@ -51,23 +50,23 @@ if ( $action == 'ajax_staff_save' ) {
 		$Users->insert($uData);
 		$miniData['userid'] = $Users->lastId();
 		
-		$Staffs->insert($miniData);
+		$Students->insert($miniData);
 		
-		$obj->msg='Staff Added';
+		$obj->msg='Student Added';
 		$obj->status=1;
-		$obj->redirect='?module=users&action=staff_add';
-		$obj->mainredirect='?module=users&action=staffs';
+		$obj->redirect='?module=users&action=student_add';
+		$obj->mainredirect='?module=users&action=students';
 				
 				} else {
 		$miniData['modifiedby'] = USER_ID;
 		
-		$Staffs->update($id,$miniData);
+		$Students->update($id,$miniData);
 		$Users->update($userid,$uData);
 		
-		$obj->msg='Staff Updated';
+		$obj->msg='Student Updated';
 		$obj->status=1;
-		$obj->redirect='?module=users&action=staff_edit&id='.$id;
-		$obj->mainredirect='?module=users&action=staffs';
+		$obj->redirect='?module=users&action=student_edit&id='.$id;
+		$obj->mainredirect='?module=users&action=students';
 				
 	}
 	

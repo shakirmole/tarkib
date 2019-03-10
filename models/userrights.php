@@ -15,7 +15,7 @@
 					where m.status = 1
 					order by m.sortno, s.sortno";
 			
-			return fetchRows($sql);
+			return $this->fetchRows($sql);
 		}
 	}
 

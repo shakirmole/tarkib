@@ -1,8 +1,8 @@
 <?php
 
-	class Settings extends model 
+	class TarkibDetails extends model 
 	{ 
-		var $table = "settings";
+		var $table = "tarkibdetails";
 		
 		function search($name='') {
 			$sql = "Select * from " . $this->table . " where 1 = 1";

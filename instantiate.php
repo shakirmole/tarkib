@@ -8,18 +8,15 @@
 	$Settings = new Settings();
 	$Colors = new Colors();
 	
-	$Staffs = new Staffs();
+	$Students = new Students();
 	$Admins = new Admins();
-		
-	$Companies = new Companies();
-	$Locations = new Locations();
-	$Devices = new Devices();
-	$Workers = new Workers();
 	
-	$DeviceWorkers = new DeviceWorkers();
-	$WorkerTimings = new WorkerTimings();
-	$Templates = new Templates();
-	$TemplateTimings = new TemplateTimings();
+	$Juzs = new Juzs();
+	$Suras = new Suras();
+	$Verses = new Verses();
+	$TarkibTypes = new TarkibTypes();
+	$ErabTypes = new ErabTypes();
+	$WordTypes = new WordTypes();
 	
-	$WorkerRegistrations = new WorkerRegistrations();
-	$WorkerAlerts = new WorkerAlerts();
+	$Tarkibs = new Tarkibs();
+	$TarkibDetails = new TarkibDetails();

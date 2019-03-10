@@ -1,5 +1,5 @@
 <h3> Settings </h3>
-<form enctype="multipart/form-data" <?=VALIDATEFORM?> action="?module=settings&action=settings_save" method="post">	
+<form enctype="multipart/form-data" <?=createValidator()?> action="?module=settings&action=settings_save" method="post">	
 	
 	<?=insertTextInput('Company Name','settings[company]',$settings['company'],'','Enter the company name','text',1,'required|Company name is required')?><br>
 	
