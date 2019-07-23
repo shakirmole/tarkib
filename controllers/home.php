@@ -15,7 +15,14 @@ if ( $action == 'index' ) {
 		$verse = $Verses->getDetails($tData['verseid']);
 		$tData['words'] = explode(' ',$verse['text']);
 		
-		$tData['tarkibTypes'] = $TarkibTypes->search();
+		$tData['erabTypes'] = $ErabTypes->search();
+		$tData['wordTypes'] = $WordTypes->search();
+
+		$tarkibTypes = $TarkibTypes->search();
+		foreach ($tarkibTypes as $tarkibType) {
+			$tData['erabTarkibTypes'][$tarkibType['erabtypeid']][] = $tarkibType;
+			$tData['wordTarkibTypes'][$tarkibType['wordtypeid']][] = $tarkibType;
+		}
 	}
 		
 	$data['content'] = loadTemplate($folder.'quran.tpl.php',$tData);

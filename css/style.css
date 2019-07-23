@@ -126,3 +126,7 @@ fieldset {
 .report-label {
 	font-weight: bold;
 }
+
+.word .caption {
+	font-size: 1.4em;
+}
